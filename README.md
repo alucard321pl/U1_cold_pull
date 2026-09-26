@@ -24,7 +24,7 @@ No `[respond]` or `[force_move]` section is required. Keep Klipper's configured 
 
 ## Preparation and use
 
-1. Finish or cancel any print. Home the printer and select the desired tool using the normal U1 procedure. It must be mounted on the carriage, not parked. `T0` corresponds to `extruder`; `T1`–`T3` correspond to `extruder1`–`extruder3`.
+1. Finish or cancel any print. Home the printer and select the desired tool using the normal U1 procedure. It must be mounted on the carriage, not parked.
 2. Position the tool somewhere accessible, at least 20 mm above the bed, with clearance for purged filament. The macro does not move XYZ or change tools.
 3. Disconnect the filament guide tube at the toolhead. Prepare approximately 250–300 mm of accessible filament and load it using the normal heated loading procedure. Keep the extruder idler engaged during automated extrusion. Do not force filament into a cold nozzle.
 4. Run the command matching your cleaning filament, for example:
@@ -33,9 +33,9 @@ No `[respond]` or `[force_move]` section is required. Keep Klipper's configured 
    SM_COLD_PULL MATERIAL=PLA
    ```
 
-5. Watch the console. At `No more motor moves...`, release the extruder idler and leave the filament in place. There are no further extruder motor moves after this message.
-6. At `PULL NOW`, pull the filament steadily upward by hand. The heater is switched off at this point. Inspect the tip for an impression of the nozzle interior and removed debris.
-7. Re-engage the idler and reconnect the guide tube afterward. Repeat with fresh filament if needed.
+5. Watch the console. At `No more motor moves...` there are no further extruder motor moves after this message.
+6. At `PULL NOW`, press extruder arm and pull the filament steadily upward by hand. The heater is switched off at this point. Inspect the tip for an impression of the nozzle interior and removed debris.
+7. Reconnect the guide tube afterward. Repeat with fresh filament if needed.
 
 Do not start a print, change tools, or run other printer operations during the procedure. Messages appear in the Klipper console; display on the stock U1 touchscreen has not been verified.
 
@@ -114,8 +114,6 @@ On September 26, 2026, a user confirmed that the macro had been tested on a phys
 | `Selected tool is not confirmed mounted...` | Select the tool normally and check that it is mounted on the carriage. |
 | `Invalid temperatures...` | Check the temperature ordering and heater limit described above. |
 | Cooling never reaches `COLD_TEMP` | Check ambient temperature and airflow. There is no macro-level wait timeout. |
-
-Do not insert backslashes before underscores in commands. Keep helper macro names unchanged.
 
 ## Reporting issues
 
