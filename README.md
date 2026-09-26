@@ -35,7 +35,7 @@ No `[respond]` or `[force_move]` section is required. Keep Klipper's configured 
    SM_COLD_PULL MATERIAL=PLA
    ```
 
-5. Watch the console. At `No more motor moves...`, press and hold the extruder release lever, leaving the filament in place. There are no further extruder motor moves after this message.
+5. Leave the filament in place and the lever unpressed while the nozzle cools. Watch the Fluidd console. At the start of reheating, `Press the lever and get ready to pull` appears immediately before the heater target is set to `PULL_TEMP`. Press and hold the extruder release lever at this message. The hotend reheats quickly, so be ready; wait for `PULL NOW` before pulling.
 6. At `PULL NOW`, keep the lever pressed and pull the filament steadily upward by hand. The heater is switched off at this point. Inspect the tip for an impression of the nozzle interior and removed debris.
 7. Let go of the lever and reconnect the guide tube afterward. Repeat with fresh filament if needed.
 
