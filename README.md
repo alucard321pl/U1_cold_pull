@@ -2,13 +2,15 @@
 
 A guided Klipper cold pull macro for Snapmaker U1, adapted from the `MMU_COLD_PULL` implementation distributed with Happy Hare. Happy Hare is not required.
 
-**Status: tested on a physical Snapmaker U1.** A user reported successful operation on September 26, 2026. Templates, command parsing and validation checks have also been tested locally. This is an unofficial community adaptation.
+**Status: tested on a physical Snapmaker U1.** I tested this macro on my Snapmaker U1 on September 26, 2026, and it worked very well. Templates, command parsing and validation checks have also been tested locally. This is an unofficial community adaptation.
 
-Heating, purging, topping up the nozzle during cooling, and reheating are automated. **The final pull is manual, with the extruder idler released.** This version does not perform Happy Hare's motor-assisted 150 mm retraction and has no `PULL_SPEED` parameter.
+Heating, purging, topping up the nozzle during cooling, and reheating are automated. **The final pull is manual, while pressing and holding the extruder release lever.** This version does not perform Happy Hare's motor-assisted 150 mm retraction and has no `PULL_SPEED` parameter.
 
 ## Installation
 
-You need access to the active Klipper configuration and console on your U1. Availability depends on the installed firmware and interface.
+First, enable **root access** in the settings menu on the printer's touchscreen. Then, on a device connected to the same local network, enter the printer's IP address in a web browser to open **Fluidd**. Use Fluidd to edit the Klipper configuration and access the console.
+
+**This macro is available through Fluidd, not through the printer's touchscreen menu.** Run the commands below in the Fluidd console and follow the messages there.
 
 1. Back up your configuration.
 2. Place [`u1_cold_pull.cfg`](u1_cold_pull.cfg) alongside your active `printer.cfg`.
@@ -24,20 +26,20 @@ No `[respond]` or `[force_move]` section is required. Keep Klipper's configured 
 
 ## Preparation and use
 
-1. Finish or cancel any print. Home the printer and select the desired tool using the normal U1 procedure. It must be mounted on the carriage, not parked.
+1. Finish or cancel any print. Home the printer and select the desired tool using the normal U1 procedure. It must be mounted on the carriage, not parked. `T0` corresponds to `extruder`; `T1`–`T3` correspond to `extruder1`–`extruder3`.
 2. Position the tool somewhere accessible, at least 20 mm above the bed, with clearance for purged filament. The macro does not move XYZ or change tools.
-3. Disconnect the filament guide tube at the toolhead. Prepare approximately 250–300 mm of accessible filament and load it using the normal heated loading procedure. Keep the extruder idler engaged during automated extrusion. Do not force filament into a cold nozzle.
+3. Disconnect the filament guide tube at the toolhead. Prepare approximately 250–300 mm of accessible filament and load it using the normal heated loading procedure. Leave the extruder release lever unpressed during automated extrusion. Do not force filament into a cold nozzle.
 4. Run the command matching your cleaning filament, for example:
 
    ```gcode
    SM_COLD_PULL MATERIAL=PLA
    ```
 
-5. Watch the console. At `No more motor moves...` there are no further extruder motor moves after this message.
-6. At `PULL NOW`, press extruder arm and pull the filament steadily upward by hand. The heater is switched off at this point. Inspect the tip for an impression of the nozzle interior and removed debris.
-7. Reconnect the guide tube afterward. Repeat with fresh filament if needed.
+5. Watch the console. At `No more motor moves...`, press and hold the extruder release lever, leaving the filament in place. There are no further extruder motor moves after this message.
+6. At `PULL NOW`, keep the lever pressed and pull the filament steadily upward by hand. The heater is switched off at this point. Inspect the tip for an impression of the nozzle interior and removed debris.
+7. Let go of the lever and reconnect the guide tube afterward. Repeat with fresh filament if needed.
 
-Do not start a print, change tools, or run other printer operations during the procedure. Messages appear in the Klipper console; display on the stock U1 touchscreen has not been verified.
+Do not start a print, change tools, or run other printer operations during the procedure. Run the macro and read its progress messages in Fluidd. The macro is not available on the printer's touchscreen.
 
 ## Material profiles
 
@@ -101,7 +103,7 @@ The adaptation was reviewed against [Snapmaker/u1-klipper commit 10f2f697](https
 
 Local checks covered template rendering, material/tool combinations, invalid parameters, printer-state guards and temperature-dependent top-up moves.
 
-On September 26, 2026, a user confirmed that the macro had been tested on a physical Snapmaker U1 and worked very well. The firmware version, selected tool, nozzle and material were not recorded with that report, so it should not be read as verification of every firmware version, tool or material profile.
+I tested this macro on my Snapmaker U1 on September 26, 2026, and it worked very well. This confirms operation on my printer; it does not mean that every firmware version, tool or material profile has been tested.
 
 ## Troubleshooting
 
@@ -114,6 +116,8 @@ On September 26, 2026, a user confirmed that the macro had been tested on a phys
 | `Selected tool is not confirmed mounted...` | Select the tool normally and check that it is mounted on the carriage. |
 | `Invalid temperatures...` | Check the temperature ordering and heater limit described above. |
 | Cooling never reaches `COLD_TEMP` | Check ambient temperature and airflow. There is no macro-level wait timeout. |
+
+Do not insert backslashes before underscores in commands. Keep helper macro names unchanged.
 
 ## Reporting issues
 
