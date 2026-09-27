@@ -26,6 +26,10 @@ No `[respond]` or `[force_move]` section is required. Keep Klipper's configured 
 
 ## Preparation and use
 
+This macro is intended for nozzle cleaning and helping clear partial clogs where filament can still flow.
+
+**If the nozzle is completely blocked, use a nozzle-cleaning needle first, preferably the one supplied with the printer.** Follow the printer manufacturer's nozzle-cleaning instructions, including the appropriate hotend temperature. Once filament can flow again, run the cold pull to help remove remaining debris. Do not run the macro's purge against a fully blocked nozzle; the macro cannot detect a blockage.
+
 1. Finish or cancel any print. Home the printer and select the desired tool using the normal U1 procedure. It must be mounted on the carriage, not parked. `T0` corresponds to `extruder`; `T1`–`T3` correspond to `extruder1`–`extruder3`.
 2. Position the tool somewhere accessible, at least 20 mm above the bed, with clearance for purged filament. The macro does not move XYZ or change tools.
 3. Disconnect the filament guide tube at the toolhead. Prepare approximately 250–300 mm of accessible filament and load it using the normal heated loading procedure. Leave the extruder release lever unpressed during automated extrusion. Do not force filament into a cold nozzle.
